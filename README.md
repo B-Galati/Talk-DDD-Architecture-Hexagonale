@@ -4,22 +4,26 @@
 > Il est seulement présent pour illustrer les propos de la conférence qui a eu lieu le 24 mai
 > pour l'AFUP Day 2024.
 
-Il y a 3 branches qui présentent chacune le même projet avec une approche différente en utilisant le framework Symfony.
+Voici un exemple des couches que l'on peut utiliser pour implémenter une architecture hexagonale :
 
-Pour naviguer aisément dans ces 3 branches, copier/coller le script suivant dans un terminal avec Bash
-et lisez le README à chaque étape pour avoir des explications détaillées.
-
-Le but du talk est de montrer : 
-- la différence entre une archi hexa et un domain model DDD
-- la synergie possible entre archi hexa et un domain model DDD
-
-```bash
-echo;echo;echo;echo '1. Un domain model seul'
-git checkout ddd-only; echo "Press a key to continue..."; read
-
-echo;echo;echo;echo '2. Une archi hexagonal avec un domain model anémique'
-git checkout archi-hexa-only; echo "Press a key to continue..."; read
-
-echo;echo;echo;echo '3. Un domain model avec une archi hexagonale'
-git checkout ddd-and-archi-hexa
+```mermaid
+graph TB
+  Ui-->Application
+  Infrastructure-->Application
 ```
+
+- `Ui` : Contient les ports primaires de notre architecture hexagonale, 
+  ici, nous avons un port HTTP et un port CLI.
+- `Application` : C'est ici que résident l'intérieur de notre application, c'est la couche qui contient
+  la logique métier que l'on veut isoler. Cette couche contient un modèle anémique.
+- `Infrastructure` : C'est tout le reste de l'application, y compris l'implémentation
+  des ports secondaires.
+
+Le style d'une architecture hexagonale est bien respecté, mais la logique métier
+est perdue dans les classes de service (l'API de la couche `Application`).
+On risque également de dupliquer cette logique métier lorsqu'on aura des
+cas d'utilisation qui requièrent des comportements similaires.
+
+La commande et le contrôleur sont devenues bien plus simples. 
+Leur seul rôle est désormais de mapper les interactions de l'utilisateur
+pour établir la communication qu'il faut avec la couche Application.
