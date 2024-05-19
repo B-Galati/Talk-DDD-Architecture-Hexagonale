@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\PortAdapter\Repository;
 
-use App\Application\Model\SignatureRequest;
-use App\Application\Repository\SignatureRequestRepository;
+use App\Domain\Model\SignatureRequest;
+use App\Domain\Model\SignatureRequestRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**

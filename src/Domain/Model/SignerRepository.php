@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Repository;
+declare(strict_types=1);
 
-use App\Application\Model\Signer;
+namespace App\Domain\Model;
 
 /**
  * Port secondaire

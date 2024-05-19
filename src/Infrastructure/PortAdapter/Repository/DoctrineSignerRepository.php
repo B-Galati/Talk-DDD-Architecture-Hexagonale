@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\PortAdapter\Repository;
 
-use App\Application\Model\Signer;
-use App\Application\Repository\SignerRepository;
+use App\Domain\Model\Signer;
+use App\Domain\Model\SignerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**

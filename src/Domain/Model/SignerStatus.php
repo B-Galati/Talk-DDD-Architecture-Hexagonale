@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Model;
+namespace App\Domain\Model;
 
 enum SignerStatus: string {
     case Init = 'init';
