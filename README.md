@@ -4,22 +4,27 @@
 > Il est seulement présent pour illustrer les propos de la conférence qui a eu lieu le 24 mai
 > pour l'AFUP Day 2024.
 
-Il y a 3 branches qui présentent chacune le même projet avec une approche différente en utilisant le framework Symfony.
+La branche actuelle illustre l'utilisation d'un modèle riche dans le framework Symfony.
 
-Pour naviguer aisément dans ces 3 branches, copier/coller le script suivant dans un terminal avec Bash
-et lisez le README à chaque étape pour avoir des explications détaillées.
+Le domain model est isolé dans une couche appelée `Domain`. C'est la couche la plus basse.
+Elle est donc isolé des autres couches.
 
-Le but du talk est de montrer : 
-- la différence entre une archi hexa et un domain model DDD
-- la synergie possible entre archi hexa et un domain model DDD
-
-```bash
-echo;echo;echo;echo '1. Un domain model seul'
-git checkout ddd-only; echo "Press a key to continue..."; read
-
-echo;echo;echo;echo '2. Une archi hexagonal avec un domain model anémique'
-git checkout archi-hexa-only; echo "Press a key to continue..."; read
-
-echo;echo;echo;echo '3. Un domain model avec une archi hexagonale'
-git checkout ddd-and-archi-hexa
+```mermaid
+graph TB
+  Command-->Domain
+  Controller-->Domain
 ```
+
+On remarquera qu'il y a du code dupliqué entre la commande et le controller.
+
+Ce n'est pas du code métier qui est dupliqué : c'est du code de persistance et d'orchestration.
+
+Cette approche peut avoir plusieurs problèmes :
+- on peut vite créer une dette technique importante comparée à un projet
+où le découplage et la factorisation a été bien pensé.
+- on aura plus de difficulté à écrire des tests unitaires.
+- le cadre est très libre ce qui laisse plus de place aux erreurs d'architecture.
+
+Néanmoins, le simple fait d'utiliser un domain model riche est un avantage qui 
+va éviter d'éparpigner et/ou dupliquer la logique métier de l'application dans toutes
+les couches. C'est le principe DRY (Don't Repeat Yourself) qui est respecté.
